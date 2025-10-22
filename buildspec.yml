@@ -15,7 +15,7 @@ phases:
     finally:
       - echo This always runs even if the login command fails 
 
-  build:
+  build:  
     commands:
       - echo Entered the build phase...
       - echo Build started on `date`
