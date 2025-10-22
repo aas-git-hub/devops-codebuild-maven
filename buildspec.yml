@@ -1,12 +1,5 @@
 version: 0.2
 
-# env:
-#   variables:
-#     JAVA_HOME: "/usr/lib/jvm/java-17-amazon-corretto"
-#     PATH: "/usr/lib/jvm/java-17-amazon-corretto/bin:$PATH"
-  # parameter-store:
-  #  LOGIN_PASSWORD: /CodeBuild/dockerLoginPassword
-
 phases:
   install:
     commands:
@@ -14,12 +7,14 @@ phases:
       - echo This always runs even if the update or install command fails 
     finally:
       - echo This always runs even if the login command fails 
+
   pre_build:
     commands:
       - echo Entered the pre_build phase...
       # - docker login -u User -p $LOGIN_PASSWORD
     finally:
       - echo This always runs even if the login command fails 
+
   build:
     commands:
       - echo Entered the build phase...
@@ -29,22 +24,25 @@ phases:
       - mvn clean install
     finally:
       - echo This always runs even if the install command fails
+
   post_build:
     commands:
       - echo Entered the post_build phase...
       - echo Build completed on `date`
 
 reports:
-  arn:aws:codebuild:your-region:your-aws-account-id:report-group/report-group-name-1:
+  test-report:
     files:
       - "**/*"
     base-directory: 'target/tests/reports'
     discard-paths: no
+
   reportGroupCucumberJson:
     files:
       - 'cucumber/target/cucumber-tests.xml'
     discard-paths: yes
     file-format: CUCUMBERJSON # default is JUNITXML
+
 artifacts:
   files:
     - target/messageUtil-1.0.jar
@@ -58,6 +56,7 @@ artifacts:
       files:
         - target/artifact-2.0.jar
       discard-paths: yes
+
 cache:
   paths:
     - '/root/.m2/**/*'
