@@ -1,9 +1,9 @@
 version: 0.2
 
-env:
-  variables:
-    JAVA_HOME: "/usr/lib/jvm/java-17-amazon-corretto"
-    PATH: "/usr/lib/jvm/java-17-amazon-corretto/bin:$PATH"
+# env:
+#   variables:
+#     JAVA_HOME: "/usr/lib/jvm/java-17-amazon-corretto"
+#     PATH: "/usr/lib/jvm/java-17-amazon-corretto/bin:$PATH"
   # parameter-store:
   #  LOGIN_PASSWORD: /CodeBuild/dockerLoginPassword
 
